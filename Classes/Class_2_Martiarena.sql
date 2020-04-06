@@ -1,5 +1,5 @@
-drop database if exists imsb;
-create database imsb;
+drop database if exists imdb;
+create database imdb;
 use imsb;
 create table film(
 	film_id int auto_increment primary key,
