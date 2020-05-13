@@ -16,3 +16,13 @@ select title, length, rating from film f1 where length <= all(select  length fro
 select first_name, address, (select amount from payment where payment.customer_id = customer.customer_id 
 			and amount <= all(select amount from payment where customer.customer_id = payment.customer_id)limit 1) as amount
 			from customer, address where address.address_id = customer.address_id order by first_name;
+
+/*Generate a report that shows the customer's information with the highest payment and the lowest payment in the same row.*/
+
+select first_name, address, (select amount from payment where payment.customer_id = customer.customer_id 
+			and amount <= all(select amount from payment where customer.customer_id = payment.customer_id)limit 1) as lowest,
+                        (select amount from payment where payment.customer_id = customer.customer_id 
+			and amount >= all(select amount from payment where customer.customer_id = payment.customer_id)limit 1) as highest 
+			from customer, address where address.address_id = customer.address_id order by first_name;
+
+
