@@ -45,7 +45,7 @@ select title, first_name,
 	from rental inner join customer using(customer_id)
 						inner join inventory using(inventory_id)
 						inner join film using(film_id)
-	where month(rental_date) = 5 or month(rental_date) = 6 and return_date is NULL;
+	where month(rental_date) = 5 or month(rental_date) = 6;
 
 
 /*Investigate CAST and CONVERT functions.
