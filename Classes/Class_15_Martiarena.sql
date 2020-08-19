@@ -12,7 +12,7 @@ inner join city using(city_id)
 inner join country using(country_id)
 inner join store using(store_id);
 
-select * from list_of_customers limit 5;
+select * from list_of_customers ;
 
 -- 2
 create or replace view film_details as 
