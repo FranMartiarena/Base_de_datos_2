@@ -1,0 +1,126 @@
+- Write examples with string
+
+  > SET redis_key Francisco
+   OK
+
+  > get redis_key
+    "Francisco"
+
+  > GETRANGE redis_key 0 1
+    "Fr"
+
+  > DEL redis_key
+    (integer) 1
+  
+- Write examples with hashes
+
+  > HMSET redis_key name"Francisco" apellido"Martiarena" age 20
+    OK
+
+  > HGETALL redis_key
+    1) "name\"Francisco\""
+    2) "apellido\"Martiarena\""
+    3) "age"
+    4) "20"
+
+- Write examples with Lists
+
+  > LPUSH lista Hola
+    (integer) 1
+
+  > LPUSH lista Mundo
+    (integer) 2
+  
+  > LRANGE lista 0 -1
+    1) "Mundo"
+    2) "Hola"
+
+  > RPOP lista
+    "Hola"
+
+- Write examples with Sets
+
+  > SADD set_key fran
+    (integer) 1
+    
+  > SADD set_key martiarena
+    (integer) 1
+    
+  > SADD set_key fran
+    (integer) 0
+
+  > SMEMBERS set_key
+    1) "martiarena"
+    2) "fran"
+
+- Write examples with Sorted Sets
+
+  > ZADD sort_key 1 fran
+    (integer) 1
+    
+  > ZADD sort_key 2 martiarena
+    (integer) 1
+
+  > ZRANGE sort_key 0 10
+    1) "fran"
+    2) "martiarena"
+    
+  > ZRANGE sort_key 0 10 WITHSCORES
+    1) "fran"
+    2) 1.0
+    3) "martiarena"
+    4) 2.0
+
+- Write examples using Publish Subscribe
+  
+  > subscribe canal1
+    1) "subscribe"
+    2) "canal1"
+  
+  > publish canal1 "Hola Mundo"
+
+  > subscribe canal1
+    1) "subscribe"
+    2) "canal1"
+    1) "message"
+    2) "canal1"
+    3) "Hola Mundo"
+    
+- Write examples using Transactions
+
+  > ZADD sort_key 1 fran
+    QUEUED
+    
+  > ZADD sort_key 2 martiarena
+    QUEUED
+    
+  > EXEC
+    1) 0
+    2) 0
+
+- Investigate backups
+
+  Redis SAVE command is used to create a backup of the current Redis database
+
+   SAVE  
+    OK 
+
+  To create Redis backup, an alternate command BGSAVE is also available. This command will start the backup process and run this in the background.
+
+  > BGSAVE  
+    Background saving started
+
+
+- Investigate Benchmarks - Run some
+
+C:\Users\franc>redis-benchmark
+====== PING_INLINE ======
+  100000 requests completed in 1.10 seconds
+  50 parallel clients
+  3 bytes payload
+  keep alive: 1
+
+99.86% <= 1 milliseconds
+100.00% <= 1 milliseconds
+90991.81 requests per second
+
